@@ -1,6 +1,11 @@
 # BACKLOGS:
-- User Controller
 - Mail
+
+# DONE:
+- User Controller
+- User Carts
+- CDs List
+- Order CDs
 - StarWars Data Fetching
 
 ### I would like to ask if this is a good practice sir?

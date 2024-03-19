@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Hash;
 
-class StoreCDsRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +23,11 @@ class StoreCDsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:50', ],
-            'artist' => ['required', 'string', 'max:20'],
-            'genre' => ['required', 'string', 'max:20'],
-            'release_year' => ['required', 'integer', 'min:1500', 'max:' . date('Y')] // 1500 since there are classical genre
+            // The Regex allows alphabetic characters, spaces, hyphens, and apostrophes.
+            'first_name' => ['required', 'string', 'min:2', 'max:50', 'regex:/^[a-zA-Z\s\-\""]+$/'],
+            'last_name' => ['required', 'string', 'min:2', 'max:50', 'regex:/^[a-zA-Z\s\-\""]+$/'],
+            'birthdate' => ['date', 'required'], // can be nullable?
+            'password' => ['required', 'string', 'min:8']
         ];
     }
 }

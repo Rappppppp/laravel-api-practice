@@ -2,12 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Resources\UsersResource;
+use App\Http\Repositories\Users\UsersRepository;
+use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+
+use Hash;
 
 class UserController extends Controller
 {
+
+    public $repository;
+    public function __construct(UsersRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -18,43 +29,37 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        //
+        $this->repository->store($request);
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'User added successfully'
+        ], 200);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        return new UsersResource($user);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
+    
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, string $id)
     {
-        //
+       $this->repository->update($request, $id);
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'User updated successfully'
+        ], 200);
     }
 
     /**
@@ -62,6 +67,13 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        // $isAdmin = auth()->user()->role == 'admin' ? 'delete sana' : 'configure middleware';
+        // ! Since there is only one line of code (for now), can I put the Delete here instead of repository sir?
+        User::findOrFail($id)->delete();
+
+        return response()->json([
+            'status' => 'Success',
+            'message' => 'User deleted successfully'
+        ], 200);
     }
 }

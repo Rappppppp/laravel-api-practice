@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API\v1\CDs;
 
 use App\Http\Controllers\Controller;
-use App\Http\Repository\CDs\CDsRepository;
+use App\Http\Repositories\CDs\CDsRepository;
 use App\Http\Requests\StoreCDsRequest;
 use App\Http\Requests\UpdateCDsRequest;
 use App\Http\Resources\CDs\CDsResource;

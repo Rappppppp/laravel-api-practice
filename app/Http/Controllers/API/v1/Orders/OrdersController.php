@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Orders\OrdersResource;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
-use App\Http\Repository\Orders\OrdersRepository;
+use App\Http\Repositories\Orders\OrdersRepository;
 use App\Models\CartItems;
 
 class OrdersController extends Controller

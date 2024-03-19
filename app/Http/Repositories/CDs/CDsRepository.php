@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Repository\CDs;
+namespace App\Http\Repositories\CDs;
 
 use App\Models\CDs;
 

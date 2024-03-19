@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Repository\Orders;
+namespace App\Http\Repositories\Orders;
 
 use App\Models\CartItems;
 use App\Models\CDs;
@@ -24,7 +24,7 @@ class OrdersRepository
     {
         $cdId = $request['cd_id'];
         $quantity = $request['quantity'];
-
+        
         // This method checks the quantity that will be stored is enough or not
         if (!$this->checkQuantity($cdId, $quantity)) {
             return response()->json([
